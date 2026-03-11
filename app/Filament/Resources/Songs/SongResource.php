@@ -13,6 +13,7 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 
 class SongResource extends Resource
 {
@@ -46,5 +47,16 @@ class SongResource extends Resource
             'create' => CreateSong::route('/create'),
             'edit' => EditSong::route('/{record}/edit'),
         ];
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        $query = parent::getEloquentQuery();
+
+        if (auth()->user()->hasRole('writer')) {
+            $query->where('writer_id', auth()->id());
+        }
+
+        return $query;
     }
 }

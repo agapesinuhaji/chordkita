@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Songs\Tables;
 
+use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -48,6 +49,28 @@ class SongsTable
             ])
             ->recordActions([
                 EditAction::make(),
+                Action::make('submit')
+                    ->label('Submit')
+                    ->visible(fn ($record) =>
+                        auth()->user()->hasRole('writer')
+                        && $record->status === 'assigned'
+                    )
+                    ->action(function ($record) {
+                        $record->update([
+                            'status' => 'submitted'
+                        ]);
+                    }),
+                Action::make('publish')
+                    ->label('Publish')
+                    ->visible(fn ($record) =>
+                        auth()->user()->hasRole('admin')
+                        && $record->status === 'submitted'
+                    )
+                    ->action(function ($record) {
+                        $record->update([
+                            'status' => 'published'
+                        ]);
+                    })
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

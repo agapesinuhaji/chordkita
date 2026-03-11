@@ -44,7 +44,7 @@ class SongForm
                     ]),
 
                 Textarea::make('chord')
-                    ->rows(15)
+                    ->rows(20)
                     ->columnSpanFull(),
             ]);
     }
