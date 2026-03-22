@@ -17,8 +17,13 @@ class ArtistForm
                 TextInput::make('name')
                     ->required()
                     ->maxLength(255)
+                    ->unique(ignoreRecord: true)
+                    ->trim() 
+                    ->dehydrateStateUsing(fn (string $state): string => Str::title(trim($state)))
                     ->live(debounce: 500)
-                    ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),
+                    ->afterStateUpdated(function (Set $set, ?string $state) {
+                        $set('slug', Str::slug(trim($state)));
+                    }),
                 TextInput::make('slug')
                     ->required()
                     ->maxLength(255)
