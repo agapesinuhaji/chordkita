@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Songs\Pages;
 
 use App\Filament\Resources\Songs\SongResource;
+use Filament\Actions\ViewAction;
 use Filament\Resources\Pages\EditRecord;
 
 class EditSong extends EditRecord
@@ -12,6 +13,7 @@ class EditSong extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
+            ViewAction::make(),
         ];
         
     }

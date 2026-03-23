@@ -5,7 +5,9 @@ namespace App\Filament\Resources\Songs;
 use App\Filament\Resources\Songs\Pages\CreateSong;
 use App\Filament\Resources\Songs\Pages\EditSong;
 use App\Filament\Resources\Songs\Pages\ListSongs;
+use App\Filament\Resources\Songs\Pages\ViewSong;
 use App\Filament\Resources\Songs\Schemas\SongForm;
+use App\Filament\Resources\Songs\Schemas\SongInfolist;
 use App\Filament\Resources\Songs\Tables\SongsTable;
 use App\Models\Song;
 use BackedEnum;
@@ -25,6 +27,11 @@ class SongResource extends Resource
         return SongForm::configure($schema);
     }
 
+    public static function infolist(Schema $schema): Schema
+    {
+        return SongInfolist::configure($schema);
+    }
+
     public static function table(Table $table): Table
     {
         return SongsTable::configure($table);
@@ -42,6 +49,7 @@ class SongResource extends Resource
         return [
             'index' => ListSongs::route('/'),
             'create' => CreateSong::route('/create'),
+            'view' => ViewSong::route('/{record}'),
             'edit' => EditSong::route('/{record}/edit'),
         ];
     }

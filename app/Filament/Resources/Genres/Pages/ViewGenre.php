@@ -3,22 +3,17 @@
 namespace App\Filament\Resources\Genres\Pages;
 
 use App\Filament\Resources\Genres\GenreResource;
-use Filament\Actions\ViewAction;
-use Filament\Resources\Pages\EditRecord;
+use Filament\Actions\EditAction;
+use Filament\Resources\Pages\ViewRecord;
 
-class EditGenre extends EditRecord
+class ViewGenre extends ViewRecord
 {
     protected static string $resource = GenreResource::class;
 
     protected function getHeaderActions(): array
     {
         return [
-            ViewAction::make(),
+            EditAction::make(),
         ];
-    }
-
-    protected function getRedirectUrl(): string
-    {
-        return $this->getResource()::getUrl('index');
     }
 }

@@ -18,8 +18,6 @@ class SongForm
         return $schema
             ->columns(1)
             ->components([
-
-                // 🔝 INFORMASI + ARTIST + GENRE
                 Section::make('Informasi Lagu')
                     ->columns(2)
                     ->schema([

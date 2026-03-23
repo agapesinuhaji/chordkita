@@ -3,22 +3,17 @@
 namespace App\Filament\Resources\Artists\Pages;
 
 use App\Filament\Resources\Artists\ArtistResource;
-use Filament\Actions\ViewAction;
-use Filament\Resources\Pages\EditRecord;
+use Filament\Actions\EditAction;
+use Filament\Resources\Pages\ViewRecord;
 
-class EditArtist extends EditRecord
+class ViewArtist extends ViewRecord
 {
     protected static string $resource = ArtistResource::class;
 
     protected function getHeaderActions(): array
     {
         return [
-            ViewAction::make(),
+            EditAction::make(),
         ];
-    }
-
-    protected function getRedirectUrl(): string
-    {
-        return $this->getResource()::getUrl('index');
     }
 }

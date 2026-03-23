@@ -5,7 +5,9 @@ namespace App\Filament\Resources\Artists;
 use App\Filament\Resources\Artists\Pages\CreateArtist;
 use App\Filament\Resources\Artists\Pages\EditArtist;
 use App\Filament\Resources\Artists\Pages\ListArtists;
+use App\Filament\Resources\Artists\Pages\ViewArtist;
 use App\Filament\Resources\Artists\Schemas\ArtistForm;
+use App\Filament\Resources\Artists\Schemas\ArtistInfolist;
 use App\Filament\Resources\Artists\Tables\ArtistsTable;
 use App\Models\Artist;
 use BackedEnum;
@@ -25,6 +27,11 @@ class ArtistResource extends Resource
         return ArtistForm::configure($schema);
     }
 
+    public static function infolist(Schema $schema): Schema
+    {
+        return ArtistInfolist::configure($schema);
+    }
+
     public static function table(Table $table): Table
     {
         return ArtistsTable::configure($table);
@@ -42,6 +49,7 @@ class ArtistResource extends Resource
         return [
             'index' => ListArtists::route('/'),
             'create' => CreateArtist::route('/create'),
+            'view' => ViewArtist::route('/{record}'),
             'edit' => EditArtist::route('/{record}/edit'),
         ];
     }

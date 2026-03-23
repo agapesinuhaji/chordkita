@@ -5,7 +5,9 @@ namespace App\Filament\Resources\Genres;
 use App\Filament\Resources\Genres\Pages\CreateGenre;
 use App\Filament\Resources\Genres\Pages\EditGenre;
 use App\Filament\Resources\Genres\Pages\ListGenres;
+use App\Filament\Resources\Genres\Pages\ViewGenre;
 use App\Filament\Resources\Genres\Schemas\GenreForm;
+use App\Filament\Resources\Genres\Schemas\GenreInfolist;
 use App\Filament\Resources\Genres\Tables\GenresTable;
 use App\Models\Genre;
 use BackedEnum;
@@ -25,6 +27,11 @@ class GenreResource extends Resource
         return GenreForm::configure($schema);
     }
 
+    public static function infolist(Schema $schema): Schema
+    {
+        return GenreInfolist::configure($schema);
+    }
+
     public static function table(Table $table): Table
     {
         return GenresTable::configure($table);
@@ -42,6 +49,7 @@ class GenreResource extends Resource
         return [
             'index' => ListGenres::route('/'),
             'create' => CreateGenre::route('/create'),
+            'view' => ViewGenre::route('/{record}'),
             'edit' => EditGenre::route('/{record}/edit'),
         ];
     }
