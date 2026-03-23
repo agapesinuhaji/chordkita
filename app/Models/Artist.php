@@ -11,4 +11,11 @@ class Artist extends Model
         'slug',
         'photo',
     ];
+
+    public function songs()
+    {
+        return $this->belongsToMany(Song::class)
+            ->withPivot('role')
+            ->withTimestamps();
+    }
 }

@@ -10,4 +10,9 @@ class Genre extends Model
         'name',
         'slug',
     ];
+
+    public function songs()
+    {
+        return $this->belongsToMany(Song::class);
+    }
 }
